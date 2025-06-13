@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Zone Motos y Futbol</title>
+    <link rel="stylesheet" href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\css\estilos.css">
+    <script src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\jquery.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Variables
+        const modalLogin = $("#modalLogin");
+        const modalRegistro = $("#modalRegistro");
+        const btnLogin = $("#btnLogin");
+        const btnRegistro = $("#btnRegistro");
+        const spanCerrar = $(".cerrar");
+        const mensajeExito = $("#mensajeExito");
+
+        // Abrir modal de login
+        btnLogin.click(function() {
+            modalLogin.show();
+        });
+
+        // Abrir modal de registro
+        btnRegistro.click(function() {
+            modalRegistro.show();
+        });
+
+        // Cerrar modales
+        spanCerrar.click(function() {
+            modalLogin.hide();
+            modalRegistro.hide();
+        });
+
+       
+
+        // Formulario de login
+        $("#formLogin").submit(function(e) {
+            e.preventDefault();
+            mostrarMensajeExito("Sesión iniciada correctamente");
+            modalLogin.hide();
+            this.reset();
+        });
+
+        // Formulario de registro
+        $("#formRegistro").submit(function(e) {
+            e.preventDefault();
+            mostrarMensajeExito("¡Registro completado con éxito!");
+            modalRegistro.hide();
+            this.reset();
+        });
+
+        // Mostrar mensaje de éxito
+        function mostrarMensajeExito(mensaje) {
+            mensajeExito.find("p").text(mensaje).parent().fadeIn().delay(2500).fadeOut();
+        }
+
+        // Efectos hover
+        $('.noticia').hover(
+            function() {
+                $(this).css({
+                    'transform': 'translateY(-5px)',
+                    'box-shadow': '0 5px 15px rgba(0,0,0,0.2)'
+                });
+            },
+            function() {
+                $(this).css({
+                    'transform': 'translateY(0)',
+                    'box-shadow': '0 2px 5px rgba(0,0,0,0.1)'
+                });
+            }
+        );
+
+        // Animaciones iniciales
+        $('.cabecera').hide().fadeIn(1000);
+        $('.destacados').hide().slideDown(800);
+        $('.sobre-nosotros').hide().fadeIn(1200);
+    });
+    </script>
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <nav class="menu">
+        <div class="contenedor">
+            <ul>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\index.html" class="activo">Inicio</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\motogp.html">MotoGP</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\futbol.html">Fútbol</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\Contacto.html">Contacto</a></li>
+                <li class="derecha">
+                    <button id="btnLogin" class="btn-acceso">Iniciar Sesión</button>
+                    <button id="btnRegistro" class="btn-acceso">Registrarse</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Modales -->
+    <div id="modalLogin" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="formLogin">
+                <div class="grupo-form">
+                    <label for="emailLogin">Email:</label>
+                    <input type="email" id="emailLogin" required>
+                </div>
+                <div class="grupo-form">
+                    <label for="passLogin">Contraseña:</label>
+                    <input type="password" id="passLogin" required>
+                </div>
+                <button type="submit" class="boton">Acceder</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalRegistro" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Registrarse</h2>
+            <form id="formRegistro">
+                <div class="grupo-form">
+                    <label for="nombreRegistro">Nombre:</label>
+                    <input type="text" id="nombreRegistro" required>
+                </div>
+                <div class="grupo-form">
+                    <label for="emailRegistro">Email:</label>
+                    <input type="email" id="emailRegistro" required>
+                </div>
+                <div class="grupo-form">
+                    <label for="passRegistro">Contraseña:</label>
+                    <input type="password" id="passRegistro" required>
+                </div>
+                <button type="submit" class="boton">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mensaje de éxito -->
+    <div id="mensajeExito" class="mensaje-exito" style="display:none;">
+        <p></p>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="contenedor">
+        <header class="cabecera">
+            <h1>Fan Zone Motos y Futbol</h1>
+            <p class="subtitulo">El lugar de los apasionados por las motos y el fútbol</p>
+        </header>
+
+        <main class="contenido-principal">
+            <section class="destacados">
+                <h2>Últimas Noticias</h2>
+                <div class="noticia">
+                    <h3>Nuevo récord en el Circuito de Jerez</h3>
+                    <p>El piloto español marcó el mejor tiempo en los entrenamientos libres del Gran Premio de España.</p>
+                    <a href="#" class="boton">Leer más</a>
+                </div>
+                
+                <div class="noticia">
+                    <h3>Sevilla FC avanza en la Copa del Rey</h3>
+                    <p>El equipo hispalense logró una victoria contundente en los octavos de final.</p>
+                    <a href="#" class="boton">Leer más</a>
+                </div>
+            </section>
+
+            <section class="sobre-nosotros">
+                <h2>Sobre Nosotros</h2>
+                <p>Fan Zone es una comunidad de apasionados por el mundo de las motos y el fútbol. Nuestro objetivo es brindar las últimas noticias, análisis y contenido exclusivo para los verdaderos fanáticos.</p>
+                
+                <div class="caracteristicas">
+                    <div class="caracteristica">
+                        <h3>Noticias Actualizadas</h3>
+                        <p>Mantente al día con lo último del MotoGP y el fútbol español.</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h3>Análisis Expertos</h3>
+                        <p>Opiniones y comentarios de nuestros especialistas.</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h3>Comunidad</h3>
+                        <p>Únete a nuestra comunidad de fanáticos.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="pie-pagina">
+            <p>&copy; 2023 Fan Zone Motos y Futbol. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>

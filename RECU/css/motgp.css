@@ -1,0 +1,249 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Menú de navegación */
+.menu {
+    background-color: #d32f2f;
+    padding: 15px 0;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu li {
+    margin: 0 15px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.menu a:hover,
+.menu a.activo {
+    background-color: #b71c1c;
+}
+
+.btn-acceso {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-acceso:hover {
+    background-color: #1565c0;
+}
+
+.derecha {
+    margin-left: auto;
+}
+
+/* Cabecera */
+.cabecera {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cabecera h1 {
+    color: #d32f2f;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+.subtitulo {
+    font-style: italic;
+    color: #666;
+    font-size: 1.2em;
+}
+
+/* Carrusel */
+.seccion-carrusel {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.carrusel-contenedor {
+    position: relative;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.carrusel {
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.carrusel img {
+    width: 100%;
+    display: none;
+}
+
+.carrusel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10;
+    border-radius: 50%;
+}
+
+.carrusel-btn:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.carrusel-btn.izquierda {
+    left: 10px;
+}
+
+.carrusel-btn.derecha {
+    right: 10px;
+}
+
+.indicador-carrusel {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Pilotos */
+#filtro-pilotos {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.lista-pilotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.piloto {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.piloto:hover {
+    transform: translateY(-5px);
+}
+
+.foto-piloto {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.info-piloto h3 {
+    margin: 0 0 5px 0;
+    color: #d32f2f;
+}
+
+/* Acordeón */
+.seccion-acordeon {
+    margin: 40px 0;
+}
+
+.acordeon-item {
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.acordeon-titulo {
+    padding: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.acordeon-titulo:hover {
+    background-color: #eee;
+}
+
+.acordeon-contenido {
+    padding: 0 15px;
+    display: none;
+}
+
+
+
+.lista-equipos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.equipo {
+    background-color: white;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.logo-equipo {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+}
+
+/* Pie de página */
+.pie-pagina {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+    color: #666;
+}

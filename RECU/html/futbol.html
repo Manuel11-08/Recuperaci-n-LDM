@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Zone - Fútbol</title>
+    <link rel="stylesheet" href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\css\futbol.css">
+    <script src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\jquery.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Carrusel de partidos destacados
+        let currentMatch = 0;
+        const matches = $('.partido');
+        const totalMatches = matches.length;
+        
+        function showMatch(n) {
+            matches.removeClass('activo');
+            matches.eq(n).addClass('activo');
+        }
+        
+        $('.carrusel-btn.izquierda').click(function() {
+            currentMatch = (currentMatch > 0) ? currentMatch - 1 : totalMatches - 1;
+            showMatch(currentMatch);
+        });
+        
+        $('.carrusel-btn.derecha').click(function() {
+            currentMatch = (currentMatch < totalMatches - 1) ? currentMatch + 1 : 0;
+            showMatch(currentMatch);
+        });
+        
+        // Iniciar carrusel
+        showMatch(0);
+        
+        // Cambio automático cada 5 segundos
+        setInterval(function() {
+            currentMatch = (currentMatch < totalMatches - 1) ? currentMatch + 1 : 0;
+            showMatch(currentMatch);
+        }, 5000);
+        
+        
+        // Mostrar/ocultar detalles de la liga
+        $('.liga-titulo').click(function() {
+            $(this).next('.liga-partidos').slideToggle();
+            $(this).find('.toggle-icon').text(function(_, text) {
+                return text === '+' ? '-' : '+';
+            });
+        });
+    });
+    </script>
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <nav class="menu">
+        <div class="contenedor">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="motogp.html">MotoGP</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\futbol.html" class="activo">Fútbol</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\Contacto.html">Contacto</a></li>
+                <li class="derecha">
+                    <button id="btnLogin" class="btn-acceso">Iniciar Sesión</button>
+                    <button id="btnRegistro" class="btn-acceso">Registrarse</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="contenedor">
+        <header class="cabecera-futbol">
+            <h1>Fútbol </h1>
+            <p class="subtitulo">Toda la pasión de LaLiga y competiciones internacionales</p>
+        </header>
+
+        <!-- Carrusel de partidos destacados -->
+        <section class="seccion-destacados">
+            <h2>Partidos Destacados</h2>
+            <div class="carrusel-partidos">
+                <button class="carrusel-btn izquierda">&#10094;</button>
+                
+                <div class="partido activo">
+                    <div class="equipo-futbol local">
+                        <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\PSG.png" alt="PSG">
+                        <span>PSG</span>
+                    </div>
+                    <div class="resultado">
+                        <span class="marcador">5 - 0</span>
+                        <span class="fecha">28/05/2025</span>
+                    </div>
+                    <div class="equipo-futbol visitante">
+                        <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\Inter.png" alt="Inter">
+                        <span>Inter de Milán</span>
+                    </div>
+                </div>
+                
+                <div class="partido">
+                    <div class="equipo-futbol local">
+                        <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\españa.jpg" alt="España">
+                        <span>España</span>
+                    </div>
+                    <div class="resultado">
+                        <span class="marcador">5 - 4</span>
+                        <span class="fecha">5/06/2025</span>
+                    </div>
+                    <div class="equipo-futbol visitante">
+                        <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\francia.jpg" alt="Francia">
+                        <span>Frnacia</span>
+                    </div>
+                </div>
+                 <div class="partido">
+                    <div class="equipo-futbol local">
+                        <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\españa.jpg" alt="España">
+                        <span>España</span>
+                    </div>
+                    <div class="resultado">
+                        <span class="marcador">5 - 4</span>
+                        <span class="fecha">5/06/2025</span>
+                    </div>
+                    <div class="equipo-futbol visitante">
+                        <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\francia.jpg" alt="Francia">
+                        <span>Frnacia</span>
+                    </div>
+                </div>
+                
+                <button class="carrusel-btn derecha">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- Últimas noticias -->
+        <section class="seccion-noticias">
+            <h2>Últimas Noticias</h2>
+            <div class="noticia-destacada">
+                <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\finalUCL.jpg" alt="Clásico Español">
+                <div class="contenido-noticia">
+                    <h3>Análisis de la final de la champions league</h3>
+                    <p>Revivimos los momentos clave del encuentro entre PSG e Inter de Milán en la final de la champions league.</p>
+                    <a href="#" class="boton">Leer más</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ligas y competiciones -->
+        <section class="seccion-ligas">
+            <h2>Competiciones</h2>
+            
+            <div class="liga">
+                <div class="liga-titulo">
+                    <h3>Mundial de clubes</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="liga-partidos">
+                    <div class="partido-simple">
+                        <span class="equipo">Al-Ahly</span>
+                        <span class="vs">vs</span>
+                        <span class="equipo">Inter de Miami</span>
+                        <span class="fecha">15/06/2025</span>
+                    </div>
+                    <div class="partido-simple">
+                        <span class="equipo">Bayern</span>
+                        <span class="vs">vs</span>
+                        <span class="equipo">Auckland City Football Club</span>
+                        <span class="fecha">15/06/2025</span>
+                    </div>
+
+                    <div class="partido-simple">
+                        <span class="equipo">PSG</span>
+                        <span class="vs">vs</span>
+                        <span class="equipo">Atlético de Madrid</span>
+                        <span class="fecha">15/06/2025</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="liga">
+                <div class="liga-titulo">
+                    <h3>La liga</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="liga-partidos">
+                    <div class="partido-simple">
+                        <span class="equipo">Sevilla</span>
+                        <span class="vs">vs</span>
+                        <span class="equipo">Espanyol</span>
+                        <span class="fecha">18/08/2025</span>
+                    </div>
+                     <div class="partido-simple">
+                        <span class="equipo">Real Madrid</span>
+                        <span class="vs">vs</span>
+                        <span class="equipo">Osasuna</span>
+                        <span class="fecha">19/08/2025</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="pie-pagina">
+        <div class="contenedor">
+            <p>&copy; 2023 Fan Zone Motos y Fútbol. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

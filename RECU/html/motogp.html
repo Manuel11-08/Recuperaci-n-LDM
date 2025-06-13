@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Zone - MotoGP</title>
+    <link rel="stylesheet" href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\css\motgp.css">
+    <script src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\jquery.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Carrusel de imágenes
+        let currentSlide = 0;
+        const slides = $('.carrusel img');
+        const totalSlides = slides.length;
+        
+        function showSlide(n) {
+            slides.hide();
+            slides.eq(n).fadeIn(600);
+            $('.indicador-carrusel').text(`${n + 1}/${totalSlides}`);
+        }
+        
+        $('.carrusel-btn.izquierda').click(function() {
+            currentSlide = (currentSlide > 0) ? currentSlide - 1 : totalSlides - 1;
+            showSlide(currentSlide);
+        });
+        
+        $('.carrusel-btn.derecha').click(function() {
+            currentSlide = (currentSlide < totalSlides - 1) ? currentSlide + 1 : 0;
+            showSlide(currentSlide);
+        });
+        
+        // Iniciar carrusel
+        showSlide(0);
+        
+        // Temporizador para cambio automático
+        setInterval(function() {
+            currentSlide = (currentSlide < totalSlides - 1) ? currentSlide + 1 : 0;
+            showSlide(currentSlide);
+        }, 5000);
+        
+        
+        
+        // Acordeón de información
+        $('.acordeon-titulo').click(function() {
+            $(this).next('.acordeon-contenido').slideToggle();
+            $(this).find('span').text(function(_, text) {
+                return text === '+' ? '-' : '+';
+            });
+        });
+        
+        // Resaltar equipo al pasar el ratón
+        $('.equipo').hover(
+            function() {
+                $(this).css('transform', 'scale(1.03)');
+                $(this).find('.logo-equipo').css('filter', 'drop-shadow(0 0 8px rgba(0,0,0,0.3))');
+            },
+            function() {
+                $(this).css('transform', 'scale(1)');
+                $(this).find('.logo-equipo').css('filter', 'none');
+            }
+        );
+    });
+    </script>
+</head>
+<body>
+    <!-- Menú de navegación -->
+    <nav class="menu">
+        <div class="contenedor">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\motogp.html" class="activo">MotoGP</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\futbol.html">Fútbol</a></li>
+                <li><a href="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\html\Contacto.html">Contacto</a></li>
+                <li class="derecha">
+                    <button id="btnLogin" class="btn-acceso">Iniciar Sesión</button>
+                    <button id="btnRegistro" class="btn-acceso">Registrarse</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="contenedor">
+        <header class="cabecera">
+            <h1>MotoGP 2025</h1>
+            <p class="subtitulo">Todo sobre el Campeonato Mundial de Motociclismo</p>
+        </header>
+
+        <!-- Carrusel de imágenes -->
+        <section class="seccion-carrusel">
+            <h2>Imágenes Destacadas</h2>
+            <div class="carrusel-contenedor">
+                <button class="carrusel-btn izquierda">&#10094;</button>
+                <div class="carrusel">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\hermanos.jpg" alt="Hermanos">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\martin.jpg" alt="Jorge">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\todos.jpg" alt="Todos">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\toprac.jpg" alt="Toprac">
+                </div>
+                <button class="carrusel-btn derecha">&#10095;</button>
+            </div>
+            <div class="indicador-carrusel"></div>
+        </section>
+
+        <!-- Búsqueda de pilotos -->
+        <section class="seccion-busqueda">
+            <h2>Pilotos</h2>
+           
+            <div class="lista-pilotos">
+                <div class="piloto">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\marc.jpg" alt="Piloto 1" class="foto-piloto">
+                    <div class="info-piloto">
+                        <h3>Marc Márquez</h3>
+                        <p>Ducati Lenovo Team</p>
+                        <p>País: España</p>
+                    </div>
+                </div>
+                <div class="piloto">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\fabio.jpg" alt="Piloto 2" class="foto-piloto">
+                    <div class="info-piloto">
+                        <h3>Fabio Quartararo</h3>
+                        <p>Monster Energy Yamaha</p>
+                        <p>País: Francia</p>
+                    </div>
+                </div>
+                <div class="piloto">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\bagnaia.jpg" alt="Piloto 3" class="foto-piloto">
+                    <div class="info-piloto">
+                        <h3>Francesco Bagnaia</h3>
+                        <p>Ducati Lenovo Team</p>
+                        <p>País: Italia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Acordeón de información -->
+        <section class="seccion-acordeon">
+            <h2>Información del Campeonato</h2>
+            <div class="acordeon">
+                <div class="acordeon-item">
+                    <div class="acordeon-titulo">
+                        Calendario 2025 <span>+</span>
+                    </div>
+                    <div class="acordeon-contenido">
+                        <ul>
+                            <li>Junio 22 - GP de Italia</li>
+                            <li>Junio 29 - GP de Paises Bajos</li>
+                            <li>Julio 13 - GP de Alemania</li>
+                            <li>Julio 20 - GP de República Checa</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="acordeon-item">
+                    <div class="acordeon-titulo">
+                        Clasificación <span>+</span>
+                    </div>
+                    <div class="acordeon-contenido">
+                        <ol>
+                            <li>Marc Márquez - 233 pts</li>
+                            <li>Alex Márquez - 201 pts</li>
+                            <li>Bagnaia - 140 pts</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equipos -->
+        <section class="seccion-equipos">
+            <h2>Equipos Participantes</h2>
+            <div class="lista-equipos">
+                <div class="equipo">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\ducati.jpg" alt="Ducati" class="logo-equipo">
+                    <h3>Ducati Lenovo Team</h3>
+                </div>
+                <div class="equipo">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\yamaha.jpg" alt="Yamaha" class="logo-equipo">
+                    <h3>Monster Energy Yamaha</h3>
+                </div>
+                <div class="equipo">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\honda.jpg" alt="Honda" class="logo-equipo">
+                    <h3>Repsol Honda Team</h3>
+                </div>
+                 <div class="equipo">
+                    <img src="C:\Users\manue\OneDrive\Documentos\Lenguuaje de Marcas\RECU\KTM.jpg" alt="Honda" class="logo-equipo">
+                    <h3>Red Bull KTM Factory Racing</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="pie-pagina">
+        <div class="contenedor">
+            <p>&copy; 2023 Fan Zone Motos y Futbol. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
