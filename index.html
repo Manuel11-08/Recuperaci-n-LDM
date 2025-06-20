@@ -1,313 +1,165 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fan Zone Motos y Futbol</title>
-    <link rel="stylesheet" href="RECU/css/estilos.css">
-    <script src="RECU/jquery.js"></script>
-    <script>
-    $(document).ready(function() {
-        const modalLogin = $("#modalLogin");
-        const modalRegistro = $("#modalRegistro");
-        const btnLogin = $("#btnLogin");
-        const btnRegistro = $("#btnRegistro");
-        const spanCerrar = $(".cerrar");
-        const mensajeExito = $("#mensajeExito");
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fan Zone Motos y Fútbol</title>
+<link rel="stylesheet" href="RECU/css/estilos.css">
+<script src="RECU/jquery.js"></script>
+<script>
+$(document).ready(function() {
+  // Modal
+  const modalLogin = $("#modalLogin"), modalRegistro = $("#modalRegistro");
+  $("#btnLogin").click(() => modalLogin.show());
+  $("#btnRegistro").click(() => modalRegistro.show());
+  $(".cerrar").click(() => modalLogin.hide() | modalRegistro.hide());
+  $("#formLogin, #formRegistro").submit(function(e) {
+    e.preventDefault();
+    $("#mensajeExito p").text(
+      this.id === "formLogin" ? "Sesión iniciada correctamente" : "¡Registro completado con éxito!"
+    );
+    $("#mensajeExito").fadeIn().delay(2500).fadeOut();
+    modalLogin.hide(); modalRegistro.hide();
+    this.reset();
+  });
 
-        btnLogin.click(function() {
-            modalLogin.show();
-        });
+  // Hover en noticias
+  $('.noticia').hover(
+    function(){ $(this).css({'transform':'translateY(-5px)','box-shadow':'0 5px 15px rgba(0,0,0,0.2)'}); },
+    function(){ $(this).css({'transform':'translateY(0)','box-shadow':'0 2px 5px rgba(0,0,0,0.1)'}); }
+  );
 
-        btnRegistro.click(function() {
-            modalRegistro.show();
-        });
+  // Animaciones iniciales
+  $('.cabecera, .seccion, .sobre-nosotros').hide().fadeIn(1000);
 
-        spanCerrar.click(function() {
-            modalLogin.hide();
-            modalRegistro.hide();
-        });
+  // Carruseles
+  function initCarrusel(prefijo){
+    let idx = 0, slides = $(`.${prefijo}-slide`), total = slides.length;
+    $(`.${prefijo}-btn.izquierda`).click(() => show(idx = idx>0?idx-1:total-1));
+    $(`.${prefijo}-btn.derecha`).click(() => show(idx = idx<total-1?idx+1:0));
+    setInterval(() => show(idx = idx<total-1?idx+1:0), 5000);
+    function show(i){
+      slides.hide().eq(i).fadeIn(500);
+    }
+    show(0);
+  }
+  initCarrusel('motogp');
+  initCarrusel('futbol');
 
-        $("#formLogin").submit(function(e) {
-            e.preventDefault();
-            mostrarMensajeExito("Sesión iniciada correctamente");
-            modalLogin.hide();
-            this.reset();
-        });
-
-        $("#formRegistro").submit(function(e) {
-            e.preventDefault();
-            mostrarMensajeExito("¡Registro completado con éxito!");
-            modalRegistro.hide();
-            this.reset();
-        });
-
-        function mostrarMensajeExito(mensaje) {
-            mensajeExito.find("p").text(mensaje).parent().fadeIn().delay(2500).fadeOut();
-        }
-
-        $('.noticia').hover(
-            function() {
-                $(this).css({
-                    'transform': 'translateY(-5px)',
-                    'box-shadow': '0 5px 15px rgba(0,0,0,0.2)'
-                });
-            },
-            function() {
-                $(this).css({
-                    'transform': 'translateY(0)',
-                    'box-shadow': '0 2px 5px rgba(0,0,0,0.1)'
-                });
-            }
-        );
-
-        $('.cabecera').hide().fadeIn(1000);
-        $('.destacados').hide().slideDown(800);
-        $('.sobre-nosotros').hide().fadeIn(1200);
-    });
-    </script>
+  // Acordeones
+  $('.liga-titulo').click(function(){
+    $(this).next('.liga-partidos').slideToggle();
+    let ic = $(this).find('.toggle-icon');
+    ic.text(ic.text()==='+'?'-':'+');
+  });
+});
+</script>
 </head>
 <body>
-    <nav class="menu">
-        <div class="contenedor">
-            <ul>
-                <li><a href="index.html" class="activo">Inicio</a></li>
-                <li><a href="#motogp">MotoGP</a></li>
-                <li><a href="#futbol">Fútbol</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li class="derecha">
-                    <button id="btnLogin" class="btn-acceso">Iniciar Sesión</button>
-                    <button id="btnRegistro" class="btn-acceso">Registrarse</button>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
-    <div id="modalLogin" class="modal">
-        <div class="modal-contenido">
-            <span class="cerrar">&times;</span>
-            <h2>Iniciar Sesión</h2>
-            <form id="formLogin">
-                <div class="grupo-form">
-                    <label for="emailLogin">Email:</label>
-                    <input type="email" id="emailLogin" required>
-                </div>
-                <div class="grupo-form">
-                    <label for="passLogin">Contraseña:</label>
-                    <input type="password" id="passLogin" required>
-                </div>
-                <button type="submit" class="boton">Acceder</button>
-            </form>
-        </div>
+<nav class="menu">
+  <div class="contenedor">
+    <ul>
+      <li><a href="#inicio" class="activo">Inicio</a></li>
+      <li><a href="#motogp">MotoGP</a></li>
+      <li><a href="#futbol">Fútbol</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li class="derecha">
+        <button id="btnLogin" class="btn-acceso">Iniciar Sesión</button>
+        <button id="btnRegistro" class="btn-acceso">Registrarse</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div id="modalLogin" class="modal"><div class="modal-contenido"><span class="cerrar">&times;</span>
+<h2>Iniciar Sesión</h2>
+<form id="formLogin"><div class="grupo-form"><label>Email:</label><input type="email" required></div>
+<div class="grupo-form"><label>Contraseña:</label><input type="password" required></div>
+<button type="submit" class="boton">Acceder</button></form></div></div>
+
+<div id="modalRegistro" class="modal"><div class="modal-contenido"><span class="cerrar">&times;</span>
+<h2>Registrarse</h2>
+<form id="formRegistro"><div class="grupo-form"><label>Nombre:</label><input type="text" required></div>
+<div class="grupo-form"><label>Email:</label><input type="email" required></div>
+<div class="grupo-form"><label>Contraseña:</label><input type="password" required></div>
+<button type="submit" class="boton">Registrarse</button></form></div></div>
+
+<div id="mensajeExito" class="mensaje-exito" style="display:none;"><p></p></div>
+
+<div class="imagen-cabeza" id="inicio">
+  <img src="RECU/css/cabecera.webp" alt="imagen cabecera">
+</div>
+
+<div class="contenedor">
+<header class="cabecera"><h1>Fan Zone Motos y Fútbol</h1><p class="subtitulo">El mejor contenido para fans</p></header>
+<main class="contenido-principal">
+
+<!-- MotoGP -->
+<section id="motogp" class="seccion">
+  <h2>MotoGP – Grandes Premios</h2>
+  <div class="carrusel-container">
+    <button class="motogp-btn izquierda">&#10094;</button>
+    <div class="motogp-slide"><img src="RECU/circuitos/jerez.png"><p>GP Jerez — Ganador: Bagnaia</p></div>
+    <div class="motogp-slide"><img src="RECU/circuitos/mugello.png"><p>GP Mugello — Ganador: Jorge Martín</p></div>
+    <button class="motogp-btn derecha">&#10095;</button>
+  </div>
+  <div class="liga">
+    <div class="liga-titulo"><h3>Categorías</h3><span class="toggle-icon">+</span></div>
+    <div class="liga-partidos"><p><strong>MotoGP:</strong> 1000 cc prototipos</p><p><strong>Moto2:</strong> 765 cc motores controlados</p><p><strong>Moto3:</strong> 250 cc, entrada al mundial</p></div>
+  </div>
+  <div class="liga">
+    <div class="liga-titulo"><h3>Calendario</h3><span class="toggle-icon">+</span></div>
+    <div class="liga-partidos"><p>GP Assen – 30/06/2025</p><p>GP Sachsenring – 07/07/2025</p><p>GP Silverstone – 14/07/2025</p></div>
+  </div>
+</section>
+
+<!-- Fútbol -->
+<section id="futbol" class="seccion">
+  <h2>Fútbol – Partidos Destacados</h2>
+  <div class="carrusel-container">
+    <button class="futbol-btn izquierda">&#10094;</button>
+    <div class="futbol-slide"><img src="RECU/PSG.png"><p>PSG 5–0 Inter – 28/05/2025</p></div>
+    <div class="futbol-slide"><img src="RECU/españa.jpg"><p>España 5–4 Francia – 05/06/2025</p></div>
+    <button class="futbol-btn derecha">&#10095;</button>
+  </div>
+  <div class="liga">
+    <div class="liga-titulo"><h3>Competiciones</h3><span class="toggle-icon">+</span></div>
+    <div class="liga-partidos">
+      <p><strong>Mundial Clubes:</strong> Al‑Ahly vs Inter Miami – 15/06/2025</p>
+      <p><strong>La Liga:</strong> Sevilla vs Espanyol – 18/08/2025 / Real Madrid vs Osasuna – 19/08/2025</p>
     </div>
+  </div>
+</section>
 
-    <div id="modalRegistro" class="modal">
-        <div class="modal-contenido">
-            <span class="cerrar">&times;</span>
-            <h2>Registrarse</h2>
-            <form id="formRegistro">
-                <div class="grupo-form">
-                    <label for="nombreRegistro">Nombre:</label>
-                    <input type="text" id="nombreRegistro" required>
-                </div>
-                <div class="grupo-form">
-                    <label for="emailRegistro">Email:</label>
-                    <input type="email" id="emailRegistro" required>
-                </div>
-                <div class="grupo-form">
-                    <label for="passRegistro">Contraseña:</label>
-                    <input type="password" id="passRegistro" required>
-                </div>
-                <button type="submit" class="boton">Registrarse</button>
-            </form>
-        </div>
-    </div>
+<!-- Sobre Nosotros -->
+<section class="sobre-nosotros">
+<h2>Sobre Nosotros</h2><p>Comunidad Fan Zone: noticias, análisis y pasión por MotoGP y fútbol.</p>
+<div class="caracteristicas">
+  <div class="caracteristica"><h3>Actualidad</h3><p>Siempre al día.</p></div>
+  <div class="caracteristica"><h3>Análisis</h3><p>Opiniones y técnica.</p></div>
+  <div class="caracteristica"><h3>Comunidad</h3><p>Comparte con otros fans.</p></div>
+</div>
+</section>
 
-    <div id="mensajeExito" class="mensaje-exito" style="display:none;">
-        <p></p>
-    </div>
+<!-- Contacto -->
+<section id="contacto" class="seccion">
+  <h2>Contacto</h2>
+  <div class="seccion-metodos">
+    <div><img src="RECU/email.jpg"><h4>Email</h4><p>info@fanzone.com</p></div>
+    <div><img src="RECU/telefono.png"><h4>Teléfono</h4><p>+34 912 345 678</p></div>
+    <div><img src="RECU/ig.jpg"><h4>Instagram</h4><p>@FanZoneOficial</p></div>
+  </div>
+  <form id="formulario-contacto">
+    <div><label>Nombre:</label><input type="text" required></div>
+    <div><label>Email:</label><input type="email" required></div>
+    <div><label>Mensaje:</label><textarea rows="4" required></textarea></div>
+    <button type="submit" class="boton">Enviar</button>
+  </form>
+</section>
 
-    <div class="imagen-cabeza">
-        <img src="RECU/css/cabecera.webp" alt="imagen-cabecera">
-    </div>
-
-    <div class="contenedor">
-        <header class="cabecera">
-            <h1>Fan Zone Motos y Futbol</h1>
-            <p class="subtitulo">El lugar de los apasionados por las motos y el fútbol</p>
-        </header>
-
-        <main class="contenido-principal">
-            <section class="destacados">
-                <h2>Últimas Noticias</h2>
-                <div class="noticia">
-                    <h3>Nuevo récord en el Circuito de Jerez</h3>
-                    <p>El piloto español marcó el mejor tiempo en los entrenamientos libres del Gran Premio de España.</p>
-                    <a href="#" class="boton">Leer más</a>
-                </div>
-                <div class="noticia">
-                    <h3>Sevilla FC avanza en la Copa del Rey</h3>
-                    <p>El equipo hispalense logró una victoria contundente en los octavos de final.</p>
-                    <a href="#" class="boton">Leer más</a>
-                </div>
-            </section>
-
-            <!-- MotoGP Section -->
-            <section class="seccion-noticias" id="motogp">
-                <h2>MotoGP: Últimos Grandes Premios</h2>
-                <div class="carrusel-partidos">
-                    <button class="carrusel-btn izquierda">&#10094;</button>
-                    <div class="partido activo">
-                        <div class="equipo-futbol local">
-                            <img src="RECU/circuitos/jerez.png" alt="Jerez">
-                            <span>GP Jerez</span>
-                        </div>
-                        <div class="resultado">
-                            <span class="marcador">1º Pecco Bagnaia</span>
-                            <span class="fecha">12/05/2025</span>
-                        </div>
-                        <div class="equipo-futbol visitante">
-                            <img src="RECU/pilotos/bagnaia.png" alt="Bagnaia">
-                            <span>Ducati</span>
-                        </div>
-                    </div>
-                    <div class="partido">
-                        <div class="equipo-futbol local">
-                            <img src="RECU/circuitos/mugello.png" alt="Mugello">
-                            <span>GP Mugello</span>
-                        </div>
-                        <div class="resultado">
-                            <span class="marcador">1º Jorge Martín</span>
-                            <span class="fecha">19/05/2025</span>
-                        </div>
-                        <div class="equipo-futbol visitante">
-                            <img src="RECU/pilotos/martin.png" alt="Martín">
-                            <span>Pramac Racing</span>
-                        </div>
-                    </div>
-                    <button class="carrusel-btn derecha">&#10095;</button>
-                </div>
-
-                <h2>Categorías</h2>
-                <div class="liga">
-                    <div class="liga-titulo">
-                        <h3>Clases del Campeonato</h3>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="liga-partidos">
-                        <div class="partido-simple">
-                            <strong>MotoGP:</strong> Categoría reina con prototipos de más de 1000cc.
-                        </div>
-                        <div class="partido-simple">
-                            <strong>Moto2:</strong> Intermedia, ideal para pilotos emergentes.
-                        </div>
-                        <div class="partido-simple">
-                            <strong>Moto3:</strong> Entrada al mundial, motos de 250cc.
-                        </div>
-                    </div>
-                </div>
-
-                <h2>Próximos Grandes Premios</h2>
-                <div class="liga">
-                    <div class="liga-titulo">
-                        <h3>Calendario 2025</h3>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="liga-partidos">
-                        <div class="partido-simple">
-                            <span class="equipo">GP Assen</span> <span class="fecha">30/06/2025</span>
-                        </div>
-                        <div class="partido-simple">
-                            <span class="equipo">GP Sachsenring</span> <span class="fecha">07/07/2025</span>
-                        </div>
-                        <div class="partido-simple">
-                            <span class="equipo">GP Silverstone</span> <span class="fecha">14/07/2025</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Aquí iría sección #futbol (omitida por longitud, pero se puede incluir si deseas) -->
-
-            <section class="sobre-nosotros">
-                <h2>Sobre Nosotros</h2>
-                <p>Fan Zone es una comunidad de apasionados por el mundo de las motos y el fútbol. Nuestro objetivo es brindar las últimas noticias, análisis y contenido exclusivo para los verdaderos fanáticos.</p>
-                <div class="caracteristicas">
-                    <div class="caracteristica">
-                        <h3>Noticias Actualizadas</h3>
-                        <p>Mantente al día con lo último del MotoGP y el fútbol español.</p>
-                    </div>
-                    <div class="caracteristica">
-                        <h3>Análisis Expertos</h3>
-                        <p>Opiniones y comentarios de nuestros especialistas.</p>
-                    </div>
-                    <div class="caracteristica">
-                        <h3>Comunidad</h3>
-                        <p>Únete a nuestra comunidad de fanáticos.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="contacto" class="seccion-contacto">
-                <header class="cabecera-contacto">
-                    <h2>Contacta con nosotros</h2>
-                    <p class="subtitulo">Estamos aquí para responder tus preguntas</p>
-                </header>
-                <div class="seccion-metodos">
-                    <h3>Nuestros canales</h3>
-                    <div class="lista-metodos">
-                        <div class="metodo-contacto">
-                            <img src="RECU/email.jpg" alt="Email">
-                            <h4>Email</h4>
-                            <p>info@fanzone.com</p>
-                        </div>
-                        <div class="metodo-contacto">
-                            <img src="RECU/telefono.png" alt="Teléfono">
-                            <h4>Teléfono</h4>
-                            <p>+34 912 345 678</p>
-                        </div>
-                        <div class="metodo-contacto">
-                            <img src="RECU/ig.jpg" alt="IG">
-                            <h4>Instagram</h4>
-                            <p>@FanZoneOficial</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="seccion-formulario">
-                    <h3>Envíanos un mensaje</h3>
-                    <form id="formulario-contacto">
-                        <div class="grupo-form">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre">
-                            <span id="error-nombre" class="error"></span>
-                        </div>
-                        <div class="grupo-form">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email">
-                            <span id="error-email" class="error"></span>
-                        </div>
-                        <div class="grupo-form">
-                            <label for="asunto">Asunto:</label>
-                            <input type="text" id="asunto" name="asunto">
-                        </div>
-                        <div class="grupo-form">
-                            <label for="mensaje">Mensaje:</label>
-                            <textarea id="mensaje" name="mensaje" rows="5"></textarea>
-                            <span id="error-mensaje" class="error"></span>
-                        </div>
-                        <button type="submit" class="boton">Enviar mensaje</button>
-                    </form>
-                    <div id="mensaje-exito" class="mensaje-exito">
-                        <p>¡Mensaje enviado con éxito! Te responderemos pronto.</p>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="pie-pagina">
-            <p>&copy; 2023 Fan Zone Motos y Futbol. Todos los derechos reservados.</p>
-        </footer>
-    </div>
+</main>
+<footer class="pie-pagina"><p>&copy; 2025 Fan Zone. Todos los derechos reservados.</p></footer>
+</div>
 </body>
 </html>
