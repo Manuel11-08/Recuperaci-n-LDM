@@ -295,3 +295,62 @@ textarea {
         right: 5px;
     }
 }
+.lista-metodos {
+    display: flex;
+    justify-content: center;  
+    gap: 40px;               
+    flex-wrap: nowrap;
+}
+
+.metodo-contacto {
+    flex: 0 0 auto;          
+    max-width: 150px;
+}
+
+
+.grupo-form textarea {
+    min-height: 160px;       
+    font-size: 1.1em;
+}
+
+
+.carrusel-partidos, .carrusel-contenedor {
+    max-width: 900px;        
+    margin: 50px auto;
+    position: relative;
+}
+
+.carrusel img,
+.partido {
+    width: 100%;
+    max-height: 400px;  
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+
+.carrusel-btn.izquierda {
+    left: 5px;
+}
+
+.carrusel-btn.derecha {
+    right: 5px;
+}
+
+@media (max-width: 768px) {
+    .lista-metodos {
+        gap: 20px;
+    }
+    
+    .carrusel-partidos, .carrusel-contenedor {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .carrusel img,
+    .partido {
+        max-height: 300px;
+    }
+}
+
