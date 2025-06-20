@@ -8,7 +8,7 @@
     <script src="RECU/jquery.js"></script>
     <script>
     $(document).ready(function() {
-        // Variables
+        
         const modalLogin = $("#modalLogin");
         const modalRegistro = $("#modalRegistro");
         const btnLogin = $("#btnLogin");
@@ -16,25 +16,23 @@
         const spanCerrar = $(".cerrar");
         const mensajeExito = $("#mensajeExito");
 
-        // Abrir modal de login
+       
         btnLogin.click(function() {
             modalLogin.show();
         });
 
-        // Abrir modal de registro
+      
         btnRegistro.click(function() {
             modalRegistro.show();
         });
 
-        // Cerrar modales
+ 
         spanCerrar.click(function() {
             modalLogin.hide();
             modalRegistro.hide();
         });
 
-       
-
-        // Formulario de login
+     
         $("#formLogin").submit(function(e) {
             e.preventDefault();
             mostrarMensajeExito("Sesión iniciada correctamente");
@@ -42,7 +40,7 @@
             this.reset();
         });
 
-        // Formulario de registro
+   
         $("#formRegistro").submit(function(e) {
             e.preventDefault();
             mostrarMensajeExito("¡Registro completado con éxito!");
@@ -50,12 +48,12 @@
             this.reset();
         });
 
-        // Mostrar mensaje de éxito
+       
         function mostrarMensajeExito(mensaje) {
             mensajeExito.find("p").text(mensaje).parent().fadeIn().delay(2500).fadeOut();
         }
 
-        // Efectos hover
+        
         $('.noticia').hover(
             function() {
                 $(this).css({
@@ -71,21 +69,29 @@
             }
         );
 
-        // Animaciones iniciales
+        
         $('.cabecera').hide().fadeIn(1000);
         $('.destacados').hide().slideDown(800);
         $('.sobre-nosotros').hide().fadeIn(1200);
+        
+        
+        $('a[href^="#"]').on('click', function(event) {
+            event.preventDefault();
+            $('html, body').animate({
+                scrollTop: $($(this).attr('href')).offset().top - 80
+            }, 800);
+        });
     });
     </script>
 </head>
 <body>
-    <!-- Menú de navegación -->
+   
     <nav class="menu">
         <div class="contenedor">
             <ul>
                 <li><a href="index.html" class="activo">Inicio</a></li>
-                <li><a href="motogp.html">MotoGP</a></li>
-                <li><a href="futbol.html">Fútbol</a></li>
+                <li><a href="#motogp">MotoGP</a></li>
+                <li><a href="#futbol">Fútbol</a></li>
                 <li><a href="#contacto">Contacto</a></li>
                 <li class="derecha">
                     <button id="btnLogin" class="btn-acceso">Iniciar Sesión</button>
@@ -95,7 +101,7 @@
         </div>
     </nav>
 
-    <!-- Modales -->
+    
     <div id="modalLogin" class="modal">
         <div class="modal-contenido">
             <span class="cerrar">&times;</span>
@@ -136,15 +142,15 @@
         </div>
     </div>
 
-    <!-- Mensaje de éxito -->
+   
     <div id="mensajeExito" class="mensaje-exito" style="display:none;">
         <p></p>
     </div>
 
-    <!-- Contenido principal -->
+   
     <div class="imagen-cabeza">
         <img src="RECU/css/cabecera.webp" alt="imagen-cabecera">
-       </div>
+    </div>
 
     <div class="contenedor">
         <header class="cabecera">
@@ -153,104 +159,58 @@
         </header>
 
         <main class="contenido-principal">
-            <section class="destacados">
-                <h2>Últimas Noticias</h2>
+            <!-- Sección MotoGP -->
+            <section id="motogp" class="seccion-motogp">
+                <h2>MotoGP</h2>
                 <div class="noticia">
-                    <h3>Nuevo récord en el Circuito de Jerez</h3>
-                    <p>El piloto español marcó el mejor tiempo en los entrenamientos libres del Gran Premio de España.</p>
+                    <img src="RECU/martin.jpg" alt="Jorge Martín">
+                    <h3>Jorge Martín lidera el campeonato</h3>
+                    <p>El piloto español consolida su posición en lo más alto tras una espectacular victoria en Jerez.</p>
                     <a href="#" class="boton">Leer más</a>
                 </div>
                 
                 <div class="noticia">
-                    <h3>Sevilla FC avanza en la Copa del Rey</h3>
-                    <p>El equipo hispalense logró una victoria contundente en los octavos de final.</p>
+                    <img src="RECU/ducati.jpg" alt="Ducati">
+                    <h3>Ducati domina los entrenamientos</h3>
+                    <p>Las Ducati muestran un ritmo imbatible en los primeros libres del Gran Premio de España.</p>
                     <a href="#" class="boton">Leer más</a>
+                </div>
+                
+                <div class="ver-mas">
+                    <a href="motogp.html" class="boton">Ver más sobre MotoGP</a>
                 </div>
             </section>
 
+            <!-- Sección Fútbol -->
+            <section id="futbol" class="seccion-futbol">
+                <h2>Fútbol</h2>
+                <div class="noticia">
+                    <img src="RECU/finalUCL.jpg" alt="Final Champions">
+                    <h3>PSG campeón de la Champions</h3>
+                    <p>El equipo parisino consigue su primera Champions League tras vencer al Inter de Milán.</p>
+                    <a href="#" class="boton">Leer más</a>
+                </div>
+                
+                <div class="noticia">
+                    <img src="RECU/laliga.jpg" alt="La Liga">
+                    <h3>La Liga 2025-2026</h3>
+                    <p>Calendario completo de la próxima temporada de La Liga Santander.</p>
+                    <a href="#" class="boton">Leer más</a>
+                </div>
+                
+                <div class="ver-mas">
+                    <a href="futbol.html" class="boton">Ver más sobre Fútbol</a>
+                </div>
+            </section>
+
+            
             <section class="sobre-nosotros">
                 <h2>Sobre Nosotros</h2>
                 <p>Fan Zone es una comunidad de apasionados por el mundo de las motos y el fútbol. Nuestro objetivo es brindar las últimas noticias, análisis y contenido exclusivo para los verdaderos fanáticos.</p>
-                
-                <div class="caracteristicas">
-                    <div class="caracteristica">
-                        <h3>Noticias Actualizadas</h3>
-                        <p>Mantente al día con lo último del MotoGP y el fútbol español.</p>
-                    </div>
-                    
-                    <div class="caracteristica">
-                        <h3>Análisis Expertos</h3>
-                        <p>Opiniones y comentarios de nuestros especialistas.</p>
-                    </div>
-                    
-                    <div class="caracteristica">
-                        <h3>Comunidad</h3>
-                        <p>Únete a nuestra comunidad de fanáticos.</p>
-                    </div>
-                </div>
-                <section id="contacto" class="seccion-contacto">
-                    <header class="cabecera-contacto">
-                        <h2>Contacta con nosotros</h2>
-                        <p class="subtitulo">Estamos aquí para responder tus preguntas</p>
-                    </header>
-    
-                   
-                    <div class="seccion-metodos">
-                        <h3>Nuestros canales</h3>
-                        <div class="lista-metodos">
-                            <div class="metodo-contacto">
-                                <img src="RECU/email.jpg" alt="Email">
-                                <h4>Email</h4>
-                                <p>info@fanzone.com</p>
-                            </div>
-                            <div class="metodo-contacto">
-                                <img src="RECU/telefono.png" alt="Teléfono">
-                                <h4>Teléfono</h4>
-                                <p>+34 912 345 678</p>
-                            </div>
-                            <div class="metodo-contacto">
-                                <img src="RECU/ig.jpg" alt="IG">
-                                <h4>Instagram</h4>
-                                <p>@FanZoneOficial</p>
-                            </div>
-                        </div>
-                    </div>
-    
-                    
-                    <div class="seccion-formulario">
-                        <h3>Envíanos un mensaje</h3>
-                        <form id="formulario-contacto">
-                            <div class="grupo-form">
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" name="nombre">
-                                <span id="error-nombre" class="error"></span>
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="email">
-                                <span id="error-email" class="error"></span>
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="asunto">Asunto:</label>
-                                <input type="text" id="asunto" name="asunto">
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="mensaje">Mensaje:</label>
-                                <textarea id="mensaje" name="mensaje" rows="5"></textarea>
-                                <span id="error-mensaje" class="error"></span>
-                            </div>
-                            
-                            <button type="submit" class="boton">Enviar mensaje</button>
-                        </form>
-                        
-                        <div id="mensaje-exito" class="mensaje-exito">
-                            <p>¡Mensaje enviado con éxito! Te responderemos pronto.</p>
-                        </div>
-                    </div>
-                </section>
+            </section>
+            
+            <section id="contacto" class="seccion-contacto">
+               
             </section>
         </main>
 
